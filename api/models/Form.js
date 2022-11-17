@@ -5,15 +5,23 @@ var formSchema = new mongoose.Schema({
     schema: {
         type: Object,
         required: true
+        
     },
     uischema: {
         type: Object,
-        required: true,
-        unique: true
+        required: true
+        
     },
-    answers: Array
 
-})
+    answers: { type: Array }
+
+
+},
+    {
+        timestamps: true,
+        versionKey: false
+    }
+)
 
 const Form = mongoose.model("forms", formSchema)
 //                            | nombre del documento
