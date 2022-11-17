@@ -4,7 +4,7 @@ var Form = require("../models/Form")
 
 // //create new user
 exports.create = (req, res) => {
-    //validate
+    // validate
     if (!req.body) {
         return res.status(400).send({ message: "Content can not be empty" })
 
@@ -14,8 +14,7 @@ exports.create = (req, res) => {
     const form = new Form({
         schema: req.body.schema,
         uischema: req.body.uischema,
-        date: req.body.date,
-        answers: req.body.answers
+        answers: req.body.answers 
     })
 
     //save form in dataBase
