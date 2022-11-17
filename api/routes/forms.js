@@ -7,7 +7,9 @@ const controllers = require("../controllers/formController")
 
 //API
 router.post("/create", controllers.create)
-router.get("/", controllers.find)
+
+//traigo todos los forms
+router.get("/", controllers.getForms)
 // router.put("/users/:id", controllers.update)
 // router.delete("/users/:id", controllers.delete)
 
