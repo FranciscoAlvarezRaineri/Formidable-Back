@@ -7,11 +7,13 @@ const controllers = require("../controllers/userController")
 
 //API
 router.post("/create", controllers.create)
-router.get("/", controllers.find)
+
+//all users
+router.get("/", controllers.getUsers)
+
+
 // router.put("/users/:id", controllers.update)
 // router.delete("/users/:id", controllers.delete)
-
-
 
 
 

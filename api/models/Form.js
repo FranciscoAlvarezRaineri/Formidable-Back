@@ -11,7 +11,6 @@ var formSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    date: Date,
     answers: Array
 
 })
