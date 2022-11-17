@@ -12,7 +12,9 @@ var formSchema = new mongoose.Schema({
         required: true
         
     },
+
     answers: { type: Array }
+
 
 },
     {

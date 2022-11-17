@@ -1,9 +1,8 @@
-var Form = require("../models/Form")
-
-
+var Form = require("../models/Form");
 
 // //create new user
 exports.create = (req, res) => {
+
     // validate
     if (!req.body) {
         return res.status(400).send({ message: "Content can not be empty" })
@@ -25,17 +24,10 @@ exports.create = (req, res) => {
 }
 
 
+
 //get all forms
-exports.find = (req, res) => {
-
-}
-
-// //update a user by userId
-// exports.find = (req, res) => {
-
-// }
-
-// //delete a user by userId
-// exports.delete = (req, res) => {
-
-// }
+exports.getForms = (req, res) => {
+  Form.find()
+    .then((forms) => res.status(200).send(forms))
+    .catch((err) => res.status(400).send(err));
+};
