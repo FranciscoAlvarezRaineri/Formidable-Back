@@ -3,6 +3,7 @@ var Form = require("../models/Form");
 // //create new user
 exports.create = (req, res) => {
 
+
   if (!req.body) {
     return res.status(400).send({ message: "Content can not be empty" });
   }
@@ -24,6 +25,7 @@ exports.create = (req, res) => {
         })
     );
 };
+
 
 //get all forms
 exports.getForms = (req, res) => {
