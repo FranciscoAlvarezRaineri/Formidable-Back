@@ -11,8 +11,12 @@ var formSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    answers: Array
-
+    answers: {
+        type : Array
+    }
+},
+{  timestamps: true,
+    versionKey: false
 })
 
 const Form = mongoose.model("forms", formSchema)

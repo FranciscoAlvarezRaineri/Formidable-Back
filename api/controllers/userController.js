@@ -10,8 +10,7 @@ exports.create = (req, res) => {
   const user = new User({
     name: req.body.name,
     email: req.body.email,
-    gender: req.body.gender,
-    status: req.body.status,
+    password: req.body.password,
   });
 
   //save user in dataBase
@@ -19,13 +18,11 @@ exports.create = (req, res) => {
     .save(user)
     .then((data) => res.send(data))
     .catch((err) =>
-      res
-        .status(500)
-        .send({
-          message:
-            err.message ||
-            "Some error occurred while creating a create operation",
-        })
+      res.status(500).send({
+        message:
+          err.message ||
+          "Some error occurred while creating a create operation",
+      })
     );
 };
 
@@ -35,3 +32,68 @@ exports.getUsers = (req, res) => {
     .then((users) => res.status(200).send(users))
     .catch((err) => res.status(400).send(err));
 };
+
+
+
+//loguear usuario
+exports.loginUsers = (req, res) => {
+  const { email } = req.body;
+
+  User.findOne({ where: { email } })
+  .then((user) =>  {
+    if (!user) return res.sendStatus(401)
+    else alert("bienvenido")
+  })
+}
+    
+
+
+/* exports.loginUsers = (req, res) => {
+  const { email, password } = req.body;
+
+  User.findOne({ where: { email } }).then((user) => {
+    if (!user) return res.sendStatus(401);
+    user.validatePassword(password).then((valid) => {
+      if (!valid) return res.sendStatus(401);
+
+      const payload = {
+        name: user.name,
+        email: user.email,
+      };
+
+      const token = generateToken(payload);
+      res.cookie("token", token);
+      res.send(payload);
+    });
+  });
+}; */
+
+
+//Modificar usuario
+
+/* exports.updateUser = (req, res) => {
+  const { id } = req.params
+  const body = req.body
+  model.updateOne(
+      { id },
+      body,
+      (err, docs) => {
+          res.send({
+             
+          })
+      })
+} */
+
+
+//borrar usuario
+
+/* exports.deleteUser = (req, res) => {
+  const { id } = req.params
+  model.deleteOne(
+      { id,},
+      (err, docs) => {
+          res.send({
+            
+          })
+      })
+} */
