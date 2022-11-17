@@ -12,16 +12,14 @@ var formSchema = new mongoose.Schema({
         required: true
         
     },
-
-    answers: { type: Array }
-
-
-},
-    {
-        timestamps: true,
-        versionKey: false
+    answers: {
+        type : Array
     }
-)
+},
+{  timestamps: true,
+    versionKey: false
+})
+
 
 const Form = mongoose.model("forms", formSchema)
 //                            | nombre del documento
