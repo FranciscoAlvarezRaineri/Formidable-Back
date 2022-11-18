@@ -33,20 +33,22 @@ exports.getUsers = (req, res) => {
     .catch((err) => res.status(400).send(err));
 };
 
-
+//traer un usuario por id
+exports.getOneUser = (req, res) => {
+  const id = req.params.id
+  User.findOne({id})
+  .then((user) => res.status(200).send(user))
+}
 
 //loguear usuario
 exports.loginUsers = (req, res) => {
   const { email } = req.body;
 
-  User.findOne({ where: { email } })
-  .then((user) =>  {
-    if (!user) return res.sendStatus(401)
-    else alert("bienvenido")
-  })
-}
-    
-
+  User.findOne({ where: { email } }).then((user) => {
+    if (!user) return res.sendStatus(401);
+    else res.send(user);
+  });
+};
 
 /* exports.loginUsers = (req, res) => {
   const { email, password } = req.body;
@@ -68,32 +70,22 @@ exports.loginUsers = (req, res) => {
   });
 }; */
 
-
 //Modificar usuario
 
-/* exports.updateUser = (req, res) => {
-  const { id } = req.params
-  const body = req.body
-  model.updateOne(
-      { id },
-      body,
-      (err, docs) => {
-          res.send({
-             
-          })
-      })
-} */
-
+exports.updateUser = (req, res) => {
+  const { id } = req.params.id;
+  const body = req.body;
+  User.updateOne({ id }, body)
+    .then((usr) => {
+      res.send(usr);
+    })
+    .catch((error) => res.sendStatus(404));
+};
 
 //borrar usuario
 
-/* exports.deleteUser = (req, res) => {
-  const { id } = req.params
-  model.deleteOne(
-      { id,},
-      (err, docs) => {
-          res.send({
-            
-          })
-      })
-} */
+exports.deleteUser = (req, res) => {
+  const { id } = req.params.id
+  User.deleteOne({id})
+  .then((user) => res.status(200).send(user))
+} 
