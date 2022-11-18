@@ -35,33 +35,27 @@ exports.getForms = (req, res) => {
 };
 
 
-//ruta para mostrar un solo formulario, y para login
-
-//Modificar Form
-
-/* exports.updateUser = (req, res) => {
-  const { id } = req.params
-  const body = req.body
-  Form.updateOne(
-      { id, },
-      body,
-      (err, docs) => {
-          res.send({
-              
-          })
-      })
-} */
+exports.getOneForm = (req, res) => {
+  const id = req.params.id
+  Form.findOne({id})
+  .then((form) => res.status(200).send(form))
+}
 
 
-//borrar form
+exports.updateForm = (req, res) => {
+  const { id } = req.params.id;
+  const body = req.body;
+  Form.updateOne({ id }, body)
+    .then((frm) => {
+      res.send(frm);
+    })
+    .catch((error) => res.sendStatus(404));
+};
 
-/* exports.deleteUser = (req, res) => {
-  const { id } = req.params
-  Form.deleteOne(
-      { id, },
-      (err, docs) => {
-          res.send({
-              
-          })
-      })
-} */
+
+
+exports.deleteForm = (req, res) => {
+  const { id } = req.params.id
+  Form.deleteOne({id})
+  .then((form) => res.status(200).send(form))
+} 

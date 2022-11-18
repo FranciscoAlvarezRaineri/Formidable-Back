@@ -1,23 +1,27 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
-
-const controllers = require("../controllers/userController")
-
+const controllers = require("../controllers/userController");
 
 //API
-router.post("/create", controllers.create)
+router.post("/create", controllers.create);
 
 //all users
-router.get("/", controllers.getUsers)
+router.get("/", controllers.getUsers);
 
 //loguear
-router.post("/login", controllers.loginUsers)
+router.post("/login", controllers.loginUsers);
+
+//traer un usuario
+router.get("/:id", controllers.getOneUser);
+
+//para modificar usuario
+router.put("/:id", controllers.updateUser)
+
+//para borrar usuario
+router.delete("/:id", controllers.deleteUser)
 
 
-// router.put("/users/:id", controllers.update)
-// router.delete("/users/:id", controllers.delete)
+//TODAS LAS RUTAS FUNCIONANDO
 
-
-
-module.exports = router
+module.exports = router;
