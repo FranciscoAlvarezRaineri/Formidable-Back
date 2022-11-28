@@ -2,22 +2,23 @@ const mongoose = require("mongoose");
 
 var responseSchema = new mongoose.Schema(
   {
+    // ID del formulario al que corresponde
     form_id: {
-      type: String, // ID del formulario al que corresponde
-      //required: true,
+      type: String,
+      required: true,
     },
+    // ID del usuario al que corresponde
     user_id: {
-      // ID del usuario al que corresponde
       type: String,
-      //required: true,
+      required: true,
     },
+    // nombre de quien responde el formulario
     name: {
-      // nombre de quien responde el formulario
       type: String,
-      //required: true,
+      required: true,
     },
+    // La respuesta en si del formulario
     response: {
-      // La respuesta en si del formulario
       type: Object,
     },
   },
