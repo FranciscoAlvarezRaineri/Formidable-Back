@@ -6,12 +6,10 @@ exports.create = (req, res) => {
     return res.status(400).send({ message: "Content can not be empty" });
   }
   const form = new Form({
-    schema: req.body.schema,
-    uischema: req.body.uischema,
-    answers: 0,
+    ...req.body,
   });
   form
-    .save()
+    .save(form)
     .then((data) => res.send(data))
     .catch((err) =>
       res.status(500).send({

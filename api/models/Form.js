@@ -8,14 +8,12 @@ var formSchema = new mongoose.Schema(
     },
     schema: {
       type: Object,
-      required: true,
+      //required: true,
     },
     uischema: {
       type: Object,
-      //required: true,
     },
   },
-
   { timestamps: true, versionKey: false }
 );
 
