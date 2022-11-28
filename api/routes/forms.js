@@ -9,6 +9,8 @@ router.post("/create", controllers.create);
 //traigo todos los forms
 router.get("/", controllers.getForms);
 
+router.get("/byUser/:user_id", controllers.getFormsByUser);
+
 //para traer un formulario
 router.get("/:id", controllers.getOneForm);
 
@@ -17,7 +19,5 @@ router.put("/:id", controllers.updateForm);
 
 //ruta para borrar formulario(a probar)
 router.delete("/:id", controllers.deleteForm);
-
-//TODAS LAS RUTAS FUNCIONANDO, EN POSTMAN AL MENOS.
 
 module.exports = router;
