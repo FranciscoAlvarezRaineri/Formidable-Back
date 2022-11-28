@@ -4,10 +4,11 @@ var formSchema = new mongoose.Schema(
   {
     user_id: {
       type: String,
+      required: true,
     },
     schema: {
       type: Object,
-      //required: true,
+      required: true,
     },
     uischema: {
       type: Object,
