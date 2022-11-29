@@ -9,16 +9,20 @@ exports.getResponses = (req, res) => {
 };
 
 exports.create = (req, res) => {
-  const response = new Response({ ...req.body });
+  const response = new Response(req.body);
   response
     .save()
     .then((response) => {
       Form.findById(response.form_id).then((form) => {
+        form.responses = [...form.responses, response._id];
+        form.save();
+      });
+      /*Form.findById(response.form_id).then((form) => {
         form.responses
           ? form.responses.push(response._id)
           : (form.responses = [response._id]);
         form.save();
-      });
+      });*/
     })
     .then(() => res.sendStatus(200))
     .catch((err) =>

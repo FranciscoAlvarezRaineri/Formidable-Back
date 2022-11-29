@@ -14,12 +14,7 @@ var responseSchema = new mongoose.Schema(
       ref: "users",
       //required: true,
     },
-    // nombre de quien responde el formulario
-    user: {
-      type: String,
-      //required: true,
-    },
-    // La respuesta en si del formulario
+    // Las respuestas al formulario
     formData: {
       type: Object,
     },
