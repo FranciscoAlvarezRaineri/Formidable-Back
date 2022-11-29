@@ -4,7 +4,7 @@ var formSchema = new mongoose.Schema(
   {
     user_id: {
       type: String,
-      required: true,
+      //required: true,
     },
     schema: {
       type: Object,
@@ -13,6 +13,13 @@ var formSchema = new mongoose.Schema(
     uischema: {
       type: Object,
     },
+    responses: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "responses",
+        required: false,
+      },
+    ],
   },
   { timestamps: true, versionKey: false }
 );

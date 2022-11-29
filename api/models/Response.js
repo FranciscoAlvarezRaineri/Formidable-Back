@@ -4,21 +4,23 @@ var responseSchema = new mongoose.Schema(
   {
     // ID del formulario al que corresponde
     form_id: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "forms",
       required: true,
     },
-    // ID del usuario al que corresponde
-    user_id: {
-      type: String,
-      required: true,
+    // ID del usuario al que correspondes
+    creator_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      //required: true,
     },
     // nombre de quien responde el formulario
-    name: {
+    user: {
       type: String,
-      required: true,
+      //required: true,
     },
     // La respuesta en si del formulario
-    response: {
+    formData: {
       type: Object,
     },
   },
