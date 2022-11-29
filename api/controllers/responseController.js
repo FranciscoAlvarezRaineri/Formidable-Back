@@ -1,4 +1,5 @@
-var Response = require("../models/Response");
+const Response = require("../models/Response");
+const Form = require("../models/Form");
 
 exports.getResponses = (req, res) => {
   Response.find()
@@ -8,16 +9,18 @@ exports.getResponses = (req, res) => {
 };
 
 exports.create = (req, res) => {
-  const { form_id, user_id, response } = req.body;
-  const newResponse = new Response({
-    form_id,
-    user_id,
-    response,
-  });
-  //save user in dataBase
-  newResponse
+  const response = new Response({ ...req.body });
+  response
     .save()
-    .then((data) => res.send(data))
+    .then((response) => {
+      Form.findById(response.form_id).then((form) => {
+        form.responses
+          ? form.responses.push(response._id)
+          : (form.responses = [response._id]);
+        form.save();
+      });
+    })
+    .then(() => res.sendStatus(200))
     .catch((err) =>
       res.status(500).send({
         message:

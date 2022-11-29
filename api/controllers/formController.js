@@ -1,4 +1,5 @@
-var Form = require("../models/Form");
+const Form = require("../models/Form");
+const Response = require("../models/Response");
 
 // //create new user
 exports.create = (req, res) => {
@@ -7,6 +8,7 @@ exports.create = (req, res) => {
   }
   const form = new Form({
     ...req.body,
+    responses: null,
   });
   form
     .save(form)
@@ -23,6 +25,7 @@ exports.create = (req, res) => {
 //get all forms
 exports.getForms = (req, res) => {
   Form.find()
+    .populate("responses")
     .sort({ createdAt: -1 })
     .then((forms) => res.status(200).send(forms))
     .catch((err) => res.status(400).send(err));
@@ -43,9 +46,9 @@ exports.getOneForm = (req, res) => {
 };
 
 exports.updateForm = (req, res) => {
-  const { id } = req.params.id;
-  const body = req.body;
-  Form.updateOne({ id }, body)
+  const _id = req.params.id;
+  console.log(_id, req.body);
+  Form.updateOne({ _id }, req.body)
     .then((form) => {
       res.status(200).send(form);
     })
@@ -56,3 +59,8 @@ exports.deleteForm = (req, res) => {
   const { id } = req.params.id;
   Form.deleteOne({ id }).then((form) => res.status(200).send(form));
 };
+
+/*exports.deleteForm = (req, res) => {
+  const { id } = req.params.id;
+  Form.remove().then((form) => res.status(200).send(form));
+};*/
