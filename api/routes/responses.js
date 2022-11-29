@@ -12,4 +12,7 @@ router.post("/create", controllers.create);
 // devuelve todas las respuestas de un formulario
 router.get("/forms/:form_id", controllers.getResponsesByForm);
 
+//devuelve una respuesta por id
+router.get("/:_id", controllers.getResponseById);
+
 module.exports = router;

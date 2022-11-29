@@ -13,16 +13,10 @@ exports.create = (req, res) => {
   response
     .save()
     .then((response) => {
-      Form.findById(response.form_id).then((form) => {
+      Form.findById(response.form).then((form) => {
         form.responses = [...form.responses, response._id];
         form.save();
       });
-      /*Form.findById(response.form_id).then((form) => {
-        form.responses
-          ? form.responses.push(response._id)
-          : (form.responses = [response._id]);
-        form.save();
-      });*/
     })
     .then(() => res.sendStatus(200))
     .catch((err) =>
@@ -35,9 +29,16 @@ exports.create = (req, res) => {
 };
 
 exports.getResponsesByForm = (req, res) => {
-  const form_id = req.params.form_id;
-  Response.find({ form_id })
+  const form = req.params.form_id;
+  Response.find({ form })
     .sort({ createdAt: -1 })
     .then((responses) => res.status(200).send(responses))
+    .catch((err) => res.status(400).send(err));
+};
+
+exports.getResponseById = (req, res) => {
+  Response.findById(req.params._id)
+    .populate("form")
+    .then((response) => res.send(response))
     .catch((err) => res.status(400).send(err));
 };

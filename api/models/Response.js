@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 var responseSchema = new mongoose.Schema(
   {
     // ID del formulario al que corresponde
-    form_id: {
+    form: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "forms",
       required: true,
     },
     // ID del usuario al que correspondes
-    creator_id: {
+    creator: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
       //required: true,
