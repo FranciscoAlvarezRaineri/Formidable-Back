@@ -14,7 +14,9 @@ exports.create = (req, res) => {
     .save()
     .then((response) => {
       Form.findById(response.form).then((form) => {
-        form.responses = [...form.responses, response._id];
+        form.responses
+          ? (form.responses = [...form.responses, response._id])
+          : (form.responses = [response._id]);
         form.save();
       });
     })
