@@ -11,6 +11,7 @@ var formSchema = new mongoose.Schema(
       //required: true,
     },
     uischema: {
+
       type: Object,
     },
     responses: [
@@ -22,6 +23,7 @@ var formSchema = new mongoose.Schema(
   },
   { timestamps: true, versionKey: false }
 );
+
 
 const Form = mongoose.model("forms", formSchema);
 //                            | nombre del documento

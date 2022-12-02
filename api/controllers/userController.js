@@ -1,4 +1,6 @@
 var User = require("../models/User");
+const { generateToken } = require("../config/tokens");
+const userService = require("../services/userService");
 
 // //create new user
 exports.create = (req, res) => {
@@ -35,39 +37,37 @@ exports.getUsers = (req, res) => {
 
 //traer un usuario por id
 exports.getOneUser = (req, res) => {
+
   const id = req.params.id;
   User.findOne({ id }).then((user) => res.status(200).send(user));
 };
 
-//loguear usuario
-exports.loginUsers = (req, res) => {
-  const { email } = req.body;
 
-  User.findOne({ where: { email } }).then((user) => {
-    if (!user) return res.sendStatus(401);
-    else res.send(user);
-  });
+
+
+
+//logIn user
+exports.loginUsers = async (req, res) => {
+  const { email, password } = req.body;
+  userService
+    .login(email, password)
+    .then((payload) => {
+      // console.log(payload);
+      // const token = generateToken(payload)
+      // console.log(token);
+      res.send(payload);
+    })
+    .catch((err) => res.status(401).send(String(err)));
 };
 
-/* exports.loginUsers = (req, res) => {
-  const { email, password } = req.body;
+//logOut user
+exports.logoutUsers = (req, res) => {
+  res.clearCookie("token");
+  res.sendStatus(204);
+};
 
-  User.findOne({ where: { email } }).then((user) => {
-    if (!user) return res.sendStatus(401);
-    user.validatePassword(password).then((valid) => {
-      if (!valid) return res.sendStatus(401);
 
-      const payload = {
-        name: user.name,
-        email: user.email,
-      };
 
-      const token = generateToken(payload);
-      res.cookie("token", token);
-      res.send(payload);
-    });
-  });
-}; */
 
 //Modificar usuario
 
@@ -84,6 +84,8 @@ exports.updateUser = (req, res) => {
 //borrar usuario
 
 exports.deleteUser = (req, res) => {
+
   const { id } = req.params.id;
   User.deleteOne({ id }).then((user) => res.status(200).send(user));
 };
+
