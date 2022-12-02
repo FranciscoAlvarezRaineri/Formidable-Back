@@ -9,8 +9,11 @@ router.post("/create", controllers.create);
 //all users
 router.get("/", controllers.getUsers);
 
-//loguear
+//RAUTA PARA LOGIN
 router.post("/login", controllers.loginUsers);
+
+//RUTA PARA LOGOUT
+router.get("/logout", controllers.logoutUsers);
 
 //traer un usuario
 router.get("/:id", controllers.getOneUser);
