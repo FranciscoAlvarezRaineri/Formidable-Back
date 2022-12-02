@@ -3,7 +3,6 @@ const mongoose = require("mongoose")
 var bcrypt = require("bcrypt")
 // SALT_WORK_FACTOR = 10
 
-var userSchema = new mongoose.Schema({
 
 
 var userSchema = new mongoose.Schema(
