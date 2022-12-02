@@ -2,16 +2,20 @@ const mongoose = require("mongoose");
 
 var formSchema = new mongoose.Schema(
   {
-    user_id: {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: true,
+    },
+    title: {
       type: String,
-      //required: true,
+      required: true,
     },
     schema: {
       type: Object,
-      //required: true,
+      required: true,
     },
     uischema: {
-
       type: Object,
     },
     responses: [
@@ -23,7 +27,6 @@ var formSchema = new mongoose.Schema(
   },
   { timestamps: true, versionKey: false }
 );
-
 
 const Form = mongoose.model("forms", formSchema);
 //                            | nombre del documento
