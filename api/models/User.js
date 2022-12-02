@@ -1,19 +1,24 @@
+
 const mongoose = require("mongoose")
 var bcrypt = require("bcrypt")
 // SALT_WORK_FACTOR = 10
 
 var userSchema = new mongoose.Schema({
 
+
+var userSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     password: String,
+
     salt: {
         type: String,
     },
@@ -69,8 +74,10 @@ userSchema.methods.validatePassword = function (password) {
 
 
 
-const User = mongoose.model("users", userSchema)
+
+
+const User = mongoose.model("users", userSchema);
+
 //                             | nombre del documento
 
-
-module.exports = User
+module.exports = User;

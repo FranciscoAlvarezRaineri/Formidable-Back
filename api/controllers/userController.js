@@ -17,7 +17,7 @@ exports.create = (req, res) => {
 
   //save user in dataBase
   user
-    .save(user)
+    .save()
     .then((data) => res.send(data))
     .catch((err) =>
       res.status(500).send({
@@ -37,10 +37,11 @@ exports.getUsers = (req, res) => {
 
 //traer un usuario por id
 exports.getOneUser = (req, res) => {
-  const id = req.params.id
-  User.findOne({ id })
-    .then((user) => res.status(200).send(user))
-}
+
+  const id = req.params.id;
+  User.findOne({ id }).then((user) => res.status(200).send(user));
+};
+
 
 
 
@@ -83,7 +84,8 @@ exports.updateUser = (req, res) => {
 //borrar usuario
 
 exports.deleteUser = (req, res) => {
-  const { id } = req.params.id
-  User.deleteOne({ id })
-    .then((user) => res.status(200).send(user))
-} 
+
+  const { id } = req.params.id;
+  User.deleteOne({ id }).then((user) => res.status(200).send(user));
+};
+
