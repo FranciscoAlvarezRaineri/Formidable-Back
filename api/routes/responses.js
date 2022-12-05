@@ -15,4 +15,6 @@ router.get("/forms/:form_id", controllers.getResponsesByForm);
 //devuelve una respuesta por id
 router.get("/:_id", controllers.getResponseById);
 
+router.put("/share", controllers.share);
+
 module.exports = router;
