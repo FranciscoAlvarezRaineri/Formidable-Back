@@ -42,9 +42,9 @@ exports.getFormsByUser = (req, res) => {
 };
 
 exports.getOneForm = (req, res) => {
-  console.log("id", req.params.id);
   const _id = req.params.id;
   Form.findById(_id)
+    .populate("responses")
     .then((form) => res.status(200).send(form))
     .catch((err) => res.status(400).send(err));
 };
