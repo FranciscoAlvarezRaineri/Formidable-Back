@@ -35,6 +35,7 @@ exports.getForms = (req, res) => {
 exports.getFormsByUser = (req, res) => {
   const user = req.params.user_id;
   Form.find({ user })
+    .populate("responses")
     .sort({ createdAt: -1 })
     .then((forms) => res.status(200).send(forms))
     .catch((err) => res.status(400).send(err));
