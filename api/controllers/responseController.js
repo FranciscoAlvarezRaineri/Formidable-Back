@@ -1,5 +1,6 @@
 const Response = require("../models/Response");
 const Form = require("../models/Form");
+const email = require("../utils/mailer");
 
 exports.getResponses = (req, res) => {
   Response.find()
@@ -43,4 +44,8 @@ exports.getResponseById = (req, res) => {
     .populate("form")
     .then((response) => res.send(response))
     .catch((err) => res.status(400).send(err));
+};
+
+exports.share = (req, res) => {
+  email.response(req.body.email, req.body.formUrl, req.body.formTitle);
 };

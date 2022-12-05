@@ -1,6 +1,7 @@
 var User = require("../models/User");
 const { generateToken } = require("../config/tokens");
 const userService = require("../services/userService");
+const email = require("../utils/mailer");
 
 // //create new user
 exports.create = (req, res) => {
@@ -76,3 +77,11 @@ exports.deleteUser = (req, res) => {
   const { id } = req.params.id;
   User.deleteOne({ id }).then((user) => res.status(200).send(user));
 };
+
+//confirma la creación del usuario
+exports.sendConfirm = (req, res) => {
+  email.confirm(req.body.email, req.body.name, req.body.confimUrl);
+};
+
+//Envía el email de confirmación
+exports.confirm = (req, res) => {};
