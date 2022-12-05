@@ -37,14 +37,9 @@ exports.getUsers = (req, res) => {
 
 //traer un usuario por id
 exports.getOneUser = (req, res) => {
-
   const id = req.params.id;
   User.findOne({ id }).then((user) => res.status(200).send(user));
 };
-
-
-
-
 
 //logIn user
 exports.loginUsers = async (req, res) => {
@@ -52,9 +47,6 @@ exports.loginUsers = async (req, res) => {
   userService
     .login(email, password)
     .then((payload) => {
-      // console.log(payload);
-      // const token = generateToken(payload)
-      // console.log(token);
       res.send(payload);
     })
     .catch((err) => res.status(401).send(String(err)));
@@ -65,9 +57,6 @@ exports.logoutUsers = (req, res) => {
   res.clearCookie("token");
   res.sendStatus(204);
 };
-
-
-
 
 //Modificar usuario
 
@@ -84,8 +73,6 @@ exports.updateUser = (req, res) => {
 //borrar usuario
 
 exports.deleteUser = (req, res) => {
-
   const { id } = req.params.id;
   User.deleteOne({ id }).then((user) => res.status(200).send(user));
 };
-
