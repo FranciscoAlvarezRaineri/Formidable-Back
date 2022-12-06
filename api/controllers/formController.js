@@ -63,8 +63,3 @@ exports.deleteForm = (req, res) => {
   console.log(_id);
   Form.deleteOne({ _id }).then((form) => res.status(200).send(form));
 };
-
-/*exports.deleteForm = (req, res) => {
-  const { id } = req.params.id;
-  Form.remove().then((form) => res.status(200).send(form));
-};*/

@@ -24,6 +24,6 @@ exports.confirm = function (email, name, confimUrl) {
     from: '"Formidable" <formidable@gmail.com>',
     to: email,
     subject: "Confirmación",
-    html: `<b>Hola: ${name} <br> Por favorm confirma que quieres crear un usuario de Formidable: <br> <a href=${confimUrl}>Confimar</a> <br>  Saludos, el equipo de Formidable.</b>`,
+    html: `<b>Hola: ${name} <br> Por favor, confirma que quieres crear un usuario de Formidable: <br> <a href=${confimUrl}>Confimar</a> <br>  Saludos, el equipo de Formidable.</b>`,
   });
 };
