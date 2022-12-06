@@ -24,4 +24,7 @@ router.put("/:id", controllers.updateUser);
 //para borrar usuario
 router.delete("/:id", controllers.deleteUser);
 
+// confirmar la creacion del usuario
+router.post("/confirm/:confirmCode", controllers.confirm);
+
 module.exports = router;

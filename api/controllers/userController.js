@@ -1,7 +1,7 @@
 var User = require("../models/User");
 const { generateToken } = require("../config/tokens");
 const userService = require("../services/userService");
-const email = require("../utils/mailer");
+const mailer = require("../utils/mailer");
 
 // //create new user
 exports.create = (req, res) => {
@@ -9,17 +9,29 @@ exports.create = (req, res) => {
   if (!req.body) {
     return res.status(400).send({ message: "Content can not be empty" });
   }
+  const { name, email, password } = req.body;
+  const confirmCode = Math.floor(Math.random() * 1000000000000);
   //new user
   const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
+    name,
+    email,
+    password,
+    confirmCode,
   });
 
   //save user in dataBase
   user
     .save()
-    .then((data) => res.send(data))
+    .then((data) => {
+      console.log(data);
+      //mandar email de confirmacion
+      mailer.confirm(
+        data.email,
+        data.name,
+        `http://localhost:3000/confirm/${data.confirmCode}`
+      );
+      res.send(data);
+    })
     .catch((err) =>
       res.status(500).send({
         message:
@@ -60,28 +72,28 @@ exports.logoutUsers = (req, res) => {
 };
 
 //Modificar usuario
-
 exports.updateUser = (req, res) => {
-  const { id } = req.params.id;
+  const id = req.params.id;
   const body = req.body;
   User.updateOne({ id }, body)
-    .then((usr) => {
-      res.send(usr);
+    .then((user) => {
+      res.send(user);
     })
     .catch((error) => res.sendStatus(404));
 };
 
 //borrar usuario
-
 exports.deleteUser = (req, res) => {
-  const { id } = req.params.id;
+  const id = req.params.id;
   User.deleteOne({ id }).then((user) => res.status(200).send(user));
 };
 
-//confirma la creación del usuario
-exports.sendConfirm = (req, res) => {
-  email.confirm(req.body.email, req.body.name, req.body.confimUrl);
-};
-
 //Envía el email de confirmación
-exports.confirm = (req, res) => {};
+exports.confirm = (req, res) => {
+  const confirmCode = req.params.confirmCode;
+  User.updateOne({ confirmCode }, { confirm: true })
+    .then(() => {
+      res.send(true);
+    })
+    .catch((error) => res.sendStatus(404));
+};

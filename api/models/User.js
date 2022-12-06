@@ -24,6 +24,13 @@ var userSchema = new mongoose.Schema({
       ref: "forms",
     },
   ],
+  confirm: {
+    type: Boolean,
+    default: false,
+  },
+  confirmCode: {
+    type: String,
+  },
 });
 
 userSchema.pre("save", function (next) {
