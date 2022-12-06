@@ -9,7 +9,7 @@ router.post("/create", controllers.create);
 //traigo todos los forms
 router.get("/", controllers.getForms);
 
-router.get("/users/:user_id", controllers.getFormsByUser);
+router.get("/users/:user/:page/:amount", controllers.getFormsByUser);
 
 //para traer un formulario
 router.get("/:id", controllers.getOneForm);
