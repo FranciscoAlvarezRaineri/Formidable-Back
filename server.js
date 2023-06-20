@@ -15,7 +15,12 @@ dotenv.config({ path: "config.env" });
 const PORT = process.env.PORT || 3001;
 
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:3000", "https://formidalbe-front.vercel.app"],
+  })
+);
 
 //parse request to body-parser
 app.use(bodyparser.urlencoded({ extended: true }));
