@@ -84,8 +84,8 @@ exports.updateUser = (req, res) => {
 
 //borrar usuario
 exports.deleteUser = (req, res) => {
-  const id = req.params.id;
-  User.deleteOne({ id }).then((user) => res.status(200).send(user));
+  const _id = req.params.id;
+  User.deleteOne({ _id }).then(() => res.sendStatus(200));
 };
 
 //Envía el email de confirmación

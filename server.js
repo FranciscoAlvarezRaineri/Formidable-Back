@@ -12,7 +12,7 @@ const connectDB = require("./api/database/connection");
 const app = express();
 
 dotenv.config({ path: "config.env" });
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 
 app.use(cookieParser());
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
